@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <!-- Título de la página -->
+    <h1 class="text-center mb-4">Mis Canciones</h1>
+    <a href="{% url 'buscar_cancion' %}" class="btn-search-more">Buscar más canciones</a>
+
+    <!-- Sección de Canciones Favoritas -->
+    <h2 class="text-center text-success mb-4">Canciones Favoritas</h2>
+    <div class="row">
+        {% for cancion in canciones %}
+            {% if cancion.es_favorita %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-success">
+                                <span class="star">★</span>{{ cancion.titulo }}
+                            </h5>
+                            <p class="card-text">{{ cancion.artista }}</p>
+                            <p><strong>Comentario:</strong> {{ cancion.comentario }}</p>
+                            <p><strong>Etiquetas:</strong> {{ cancion.etiquetas }}</p>
+                            <p><strong>Calificación:</strong> {{ cancion.calificacion }}</p>
+                            <a href="{% url 'editar_cancion' cancion.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'eliminar_cancion' cancion.id %}" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- Sección de Canciones No Favoritas -->
+    <h2 class="text-center text-white mb-4">Otras Canciones</h2>
+    <div class="row">
+        {% for cancion in canciones %}
+            {% if not cancion.es_favorita %}
+                <div class="col-md-4">
+                    <div class="card mb-4">
+                        <div class="card-body">
+                            <h5 class="card-title text-white">{{ cancion.titulo }}</h5>
+                            <p class="card-text">{{ cancion.artista }}</p>
+                            <p><strong>Comentario:</strong> {{ cancion.comentario }}</p>
+                            <p><strong>Etiquetas:</strong> {{ cancion.etiquetas }}</p>
+                            <p><strong>Calificación:</strong> {{ cancion.calificacion }}</p>
+                            <a href="{% url 'editar_cancion' cancion.id %}" class="btn btn-primary">Editar</a>
+                            <a href="{% url 'eliminar_cancion' cancion.id %}" class="btn btn-danger">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
