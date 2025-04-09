@@ -38,8 +38,8 @@ app_musica/
 ## Requisitos
 
 Para ejecutar este proyecto necesitas:
-
+- **Git** (para clonar el repositorio)
 - **Python 3.x**
 - **pip** (administrador de paquetes para Python)
-- **Git** (para clonar el repositorio)
-- **pip install requests**
+- **pip install django**
+- **pip install requests** : Para realizar peticiones HTTP a la API de Deezer.
