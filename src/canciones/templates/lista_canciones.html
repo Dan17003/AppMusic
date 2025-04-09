@@ -17,9 +17,24 @@
                                 <span class="star">★</span>{{ cancion.titulo }}
                             </h5>
                             <p class="card-text">{{ cancion.artista }}</p>
+                            
+                            <!-- Mostrar portada del álbum -->
+                            {% if cancion.portada %}
+                                <img src="{{ cancion.portada }}" alt="{{ cancion.titulo }}" class="img-fluid mb-3">
+                            {% endif %}
+                            
                             <p><strong>Comentario:</strong> {{ cancion.comentario }}</p>
                             <p><strong>Etiquetas:</strong> {{ cancion.etiquetas }}</p>
                             <p><strong>Calificación:</strong> {{ cancion.calificacion }}</p>
+
+                            <!-- Reproductor de música -->
+                            {% if cancion.preview_url %}
+                                <audio controls>
+                                    <source src="{{ cancion.preview_url }}" type="audio/mp3">
+                                    Tu navegador no soporta la etiqueta de audio.
+                                </audio>
+                            {% endif %}
+
                             <a href="{% url 'editar_cancion' cancion.id %}" class="btn btn-primary">Editar</a>
                             <a href="{% url 'eliminar_cancion' cancion.id %}" class="btn btn-danger">Eliminar</a>
                         </div>
@@ -39,9 +54,24 @@
                         <div class="card-body">
                             <h5 class="card-title text-white">{{ cancion.titulo }}</h5>
                             <p class="card-text">{{ cancion.artista }}</p>
+
+                            <!-- Mostrar portada del álbum -->
+                            {% if cancion.portada %}
+                                <img src="{{ cancion.portada }}" alt="{{ cancion.titulo }}" class="img-fluid mb-3">
+                            {% endif %}
+                            
                             <p><strong>Comentario:</strong> {{ cancion.comentario }}</p>
                             <p><strong>Etiquetas:</strong> {{ cancion.etiquetas }}</p>
                             <p><strong>Calificación:</strong> {{ cancion.calificacion }}</p>
+
+                            <!-- Reproductor de música -->
+                            {% if cancion.preview_url %}
+                                <audio controls>
+                                    <source src="{{ cancion.preview_url }}" type="audio/mp3">
+                                    Tu navegador no soporta la etiqueta de audio.
+                                </audio>
+                            {% endif %}
+
                             <a href="{% url 'editar_cancion' cancion.id %}" class="btn btn-primary">Editar</a>
                             <a href="{% url 'eliminar_cancion' cancion.id %}" class="btn btn-danger">Eliminar</a>
                         </div>

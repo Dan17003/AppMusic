@@ -28,6 +28,27 @@ def agregar_cancion(request):
 
 def lista_canciones(request):
     canciones = Cancion.objects.all()
+
+    # Obtener información de Deezer para cada canción
+    for cancion in canciones:
+        # Hacer una solicitud a Deezer para obtener la información de la canción
+        url = f"https://api.deezer.com/search?q={cancion.titulo} {cancion.artista}"
+        response = requests.get(url)
+        
+        if response.status_code == 200:
+            data = response.json()
+            if data['data']:
+                # Tomar la primera coincidencia (puedes elegir otra lógica si lo prefieres)
+                cancion_data = data['data'][0]
+                cancion.portada = cancion_data['album']['cover_medium']
+                cancion.preview_url = cancion_data['preview']  # URL de previsualización de la canción
+            else:
+                cancion.portada = None
+                cancion.preview_url = None
+        else:
+            cancion.portada = None
+            cancion.preview_url = None
+
     return render(request, 'lista_canciones.html', {'canciones': canciones})
 
 def editar_cancion(request, cancion_id):
